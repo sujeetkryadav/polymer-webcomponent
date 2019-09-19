@@ -101,7 +101,9 @@ class AutocompleteWebComponent extends LitElement {
       }
     };
     // tslint:disable-next-line:no-unused-expression
-    $event.target.value.length > 2 ? xhttp.send() : '';
+    if($event.target.value.length > 2){
+         xhttp.send()
+     }
   }
   /*
    * TO Select item from search list
