@@ -34,13 +34,12 @@ class TodoView extends LitElement {
     </dropdown-search-component>
 </div>
 <div class="field-wrapper">
-  <dropdown-search-component
-    url="${this.recipientUrl}"
+<input-tags-component
+    url="${this.serviceUrl}"
     placeholder="Please select a recipient"
     width="400"
-    @on-change="${this.onChangeRecipient}">
-
-  </dropdown-search-component>
+    >
+</input-tags-component>
     </div>
     `;
   }
