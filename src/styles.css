@@ -14,16 +14,7 @@ html {
   padding: 0;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Segoe UI',
-    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol';
-  margin: 0;
-  padding: 0;
-  color: var(--dark-color);
-  font-size: 18px;
-  line-height: 1.5rem;
-}
+
 
 [hidden] {
   display: none;
