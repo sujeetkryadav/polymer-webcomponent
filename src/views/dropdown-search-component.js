@@ -75,19 +75,22 @@ class DropDownSearchWebComponent extends LitElement {
           position: absolute;
           cursor: pointer;
       }
+      .drop-down-box{
+        display: none;
+        margin-left: 10px;
+      }
       </style>
       <div class="autocom-container" style="width: ${this.width}px">
        ${this.isSet ? html`<div id="close-icon" @click=${this.clearField}>
          <span id="x">X</span>
       </div>` : ''}
-      <input name="autocom" placeholder=${this.placeholder} .value="${this.selectedItem}" class="autocom" type="text">
-      ${(this.searchResult.length !== 0 && this.isSelected) ? html`<div class="drop-down-box">
-         <ul>
+      <input name="autocom" placeholder=${this.placeholder} .value="${this.selectedItem}" class="autocom" type="text"  @keyup=${this.filter}>
+      <div class="drop-down-box" id="list-container">
+         <ul id="list">
             ${this.searchResult.map((item) => html`<li @click=${this.selectItem.bind(this, item)}>${item['name']}</li>`)}
          </ul>
-       </div>` : ''
-      }
-       </div>`;
+       </div>
+       </div>`
   }
   /*
    * TO Select item from search list
@@ -96,8 +99,12 @@ class DropDownSearchWebComponent extends LitElement {
     this.selectedItem = item.name;
     this.isSelected = false;
     this.isSet = true;
+    this.shadowRoot.getElementById('list-container').style.display = 'none';
     // --- TO retun value to parent component ---//
-
+ // --- TO retun value to parent component ---//
+    this.dispatchEvent(new CustomEvent('on-change', {
+        detail: item
+    }));
   }
   /*
    * TO Clear selected field
@@ -110,12 +117,14 @@ class DropDownSearchWebComponent extends LitElement {
    * To Detect change in property
    */
   updated(changedProperties) {
-    console.log(this.url);
-    // tslint:disable-next-line:no-unused-expression
-    if(this.url !== undefined && this.url !== 'undefined')
-    this.loadData(this.url);
+    changedProperties.forEach((oldValue, propName) => {
+      if(propName === 'url' && (this.url !== undefined && this.url !== 'undefined')){
+        this.loadData(this.url);
+      }
+    });
+   
   }
-
+ 
   loadData(url) {
     const self = this;
     const xhttp = new XMLHttpRequest();
@@ -124,10 +133,22 @@ class DropDownSearchWebComponent extends LitElement {
     xhttp.onreadystatechange = function() {
       if (this.readyState === 4 && this.status === 200) {
         self.searchResult = JSON.parse(this.response);
-        self.isSelected = true;
       }
     };
     xhttp.send();
+  }
+
+  filter($event){
+    this.isSelected = true;
+    this.shadowRoot.getElementById('list-container').style.display = 'block';
+    this.shadowRoot.querySelectorAll('#list li').forEach((val, index) => {
+      const txtValue = val.textContent;
+      if (txtValue.toUpperCase().indexOf($event.target.value.toUpperCase()) > -1) {
+        val.style.display = 'block';
+      } else {
+        val.style.display = 'none';
+      }
+    });
   }
 }
 customElements.define('dropdown-search-component', DropDownSearchWebComponent);

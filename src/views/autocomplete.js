@@ -64,6 +64,7 @@ class AutocompleteWebComponent extends LitElement {
              right: 0;
              left: 0;
              width: inherit;
+             margin-left: 10px;
         }
         #close-icon {
           color: #4a4a4a;
@@ -90,6 +91,7 @@ class AutocompleteWebComponent extends LitElement {
        </div>`;
   }
   handleKeyEvent($event) {
+    //console.log($event.target.value.length)
     const self = this;
     const xhttp = new XMLHttpRequest();
     xhttp.open('GET', this.url , true);
@@ -100,10 +102,8 @@ class AutocompleteWebComponent extends LitElement {
         self.isSelected = true;
       }
     };
-    // tslint:disable-next-line:no-unused-expression
-    if($event.target.value.length > 2){
-         xhttp.send()
-     }
+    if($event.target.value.length > 2) 
+      xhttp.send()
   }
   /*
    * TO Select item from search list

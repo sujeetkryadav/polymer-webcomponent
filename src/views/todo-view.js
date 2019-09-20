@@ -18,7 +18,7 @@ class TodoView extends LitElement {
         <autocomplete-component
             url="https://jsonplaceholder.typicode.com/users"
             placeholder="Please select a client"
-            width="200"
+            width="400"
             @on-change="${this.onChanged}"
            >
 
@@ -28,7 +28,8 @@ class TodoView extends LitElement {
     <dropdown-search-component
       url="${this.serviceUrl}"
       placeholder="Please select a service"
-      width="200">
+      width="400"
+      @on-change="${this.onChangeService}">
 
     </dropdown-search-component>
 </div>
@@ -36,7 +37,8 @@ class TodoView extends LitElement {
   <dropdown-search-component
     url="${this.recipientUrl}"
     placeholder="Please select a recipient"
-    width="200">
+    width="400"
+    @on-change="${this.onChangeRecipient}">
 
   </dropdown-search-component>
     </div>
@@ -47,10 +49,22 @@ class TodoView extends LitElement {
    */
   onChanged($event) {
     console.log('Changed',$event);
-    this.url = "https://jsonplaceholder.typicode.com/users"+$event.detail.address['city'];
-    this.recipientUrl = "https://jsonplaceholder.typicode.com/users"+$event.detail.address['city'];
-    this.serviceUrl = "https://jsonplaceholder.typicode.com/users"+$event.detail.address['city'];
+    this.url = "https://jsonplaceholder.typicode.com/users?id="+$event.detail.address['city'];
+    this.recipientUrl = "https://jsonplaceholder.typicode.com/users";
+    this.serviceUrl = "https://jsonplaceholder.typicode.com/users";
     this.isSelected = true;
+  }
+  /*
+   * TO detect chnage of service
+   */
+  onChangeRecipient($event) {
+    console.log('Changed',$event);
+  }
+   /*
+   * TO deetct chnage of service
+   */
+  onChangeService($event) {
+    console.log('Changed',$event);
   }
 }
 
