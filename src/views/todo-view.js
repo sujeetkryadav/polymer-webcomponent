@@ -38,7 +38,7 @@ class TodoView extends LitElement {
     url="${this.serviceUrl}"
     placeholder="Please select a recipient"
     width="400"
-    >
+    @on-change="${this.onChangeRecipient}">
 </input-tags-component>
     </div>
     `;

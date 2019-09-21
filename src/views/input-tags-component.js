@@ -10,7 +10,8 @@ class InputTagsWebComponent extends LitElement {
       isSet: {type: Boolean},
       url: {type: String},
       width: {type: Number},
-      placeholder: {type: String}
+      placeholder: {type: String},
+      userList: {type: []},
     };
   }
 
@@ -21,6 +22,7 @@ class InputTagsWebComponent extends LitElement {
     this.isSelected = false;
     this.width = 200;
     this.isSet = false;
+    this.userList = [];
   }
   render() {
     return html`
@@ -88,7 +90,7 @@ class InputTagsWebComponent extends LitElement {
       <div class="autocom-container" style="width: ${this.width}px">
       <div id="tags">
         <div id="tag-wrapper">
-          
+        ${this.userList.map((item) => html`<div class="tag"><div>${item['name']}</div><div class="close" @click=${this.removeUser.bind(this, item)}></div><div>`)}
         </div>
         <div id="input-wrapper">
           <input type="text" id="add_tag" 
@@ -111,11 +113,14 @@ class InputTagsWebComponent extends LitElement {
     this.isSelected = false;
     this.isSet = true;
     this.shadowRoot.getElementById('list-container').style.display = 'none';
-    this.shadowRoot.getElementById('tag-wrapper')
-    .insertAdjacentHTML('beforeend', '<div class="tag"><div>'+item.name+'</div><div class="close"></div><div>');
+    if(this.userList.indexOf(item) === -1){
+      this.userList.push(item);
+      // this.shadowRoot.getElementById('tag-wrapper')
+      // .insertAdjacentHTML('beforeend', '<div class="tag"><div>'+item.name+'</div><div class="close"></div><div>');
+    }
  // --- TO retun value to parent component ---//
     this.dispatchEvent(new CustomEvent('on-change', {
-      detail: item
+      detail: this.userList
     }));
   }
   /*
@@ -161,6 +166,15 @@ class InputTagsWebComponent extends LitElement {
           val['style'].display = 'none';
         }
       });
+  }
+  removeUser(item){
+    const indexToDelete = this.userList.indexOf(item);
+    this.userList = this.userList.filter(
+      (toDelete, index) => index !== indexToDelete
+    );
+     this.dispatchEvent(new CustomEvent('on-change', {
+      detail: this.userList
+     }));
   }
 }
 customElements.define('input-tags-component', InputTagsWebComponent);
