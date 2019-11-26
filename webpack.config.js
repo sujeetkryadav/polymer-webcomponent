@@ -11,21 +11,7 @@ const loadPresets = require('./build-utils/loadPresets');
 const webcomponentsjs = './node_modules/@webcomponents/webcomponentsjs';
 
 const polyfills = [
-  {
-    from: resolve(`${webcomponentsjs}/webcomponents-*.{js,map}`),
-    to: 'vendor',
-    flatten: true
-  },
-  {
-    from: resolve(`${webcomponentsjs}/bundles/*.{js,map}`),
-    to: 'vendor/bundles',
-    flatten: true
-  },
-  {
-    from: resolve(`${webcomponentsjs}/custom-elements-es5-adapter.js`),
-    to: 'vendor',
-    flatten: true
-  }
+ 
 ];
 
 const assets = [
