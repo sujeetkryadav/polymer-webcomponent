@@ -1,7 +1,7 @@
 {
   "name": "pwa-conf-app",
   "version": "1.0.0",
-  "description": "This is a PWA tutorial app. You can find the tutorial on the [Vaadin website](https://vaadin.com/progressive-web-applications).",
+  "description": "This is a Web component Example",
   "main": "sw.js",
   "scripts": {
     "webpack": "webpack",
@@ -10,17 +10,8 @@
     "dev": "npm run webpack-dev-server -- --env.mode development",
     "dev:sw": "npm run webpack-dev-server -- --env.mode development  --env.presets serviceworker"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vaadin-learning-center/lit-element-tutorial-01-starting-a-lit-element-project.git"
-  },
   "keywords": [],
-  "author": "Marcus Hellberg <marcus@vaadin.com>",
   "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/vaadin-learning-center/lit-element-tutorial-01-starting-a-lit-element-project/issues"
-  },
-  "homepage": "https://github.com/vaadin-learning-center/lit-element-tutorial-01-starting-a-lit-element-project#readme",
   "devDependencies": {
     "@babel/core": "^7.1.5",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
