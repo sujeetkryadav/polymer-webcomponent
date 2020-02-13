@@ -11,64 +11,64 @@ const loadPresets = require('./build-utils/loadPresets');
 const webcomponentsjs = './node_modules/@webcomponents/webcomponentsjs';
 
 const polyfills = [
- 
+
 ];
 
 const assets = [
-  {
-    from: 'src/img',
-    to: 'img/'
-  }
+    {
+        from: 'src/img',
+        to: 'img/'
+    }
 ];
 
 const plugins = [
-  new CleanWebpackPlugin(['dist']),
-  new webpack.ProgressPlugin(),
-  new HtmlWebpackPlugin({
-    filename: 'index.html',
-    template: './src/index.html',
-    minify: {
-      collapseWhitespace: true,
-      minifyCSS: true,
-      minifyJS: true
-    }
-  }),
-  new CopyWebpackPlugin([...polyfills, ...assets], {
-    ignore: ['.DS_Store']
-  })
+    new CleanWebpackPlugin(['dist']),
+    new webpack.ProgressPlugin(),
+    new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: './src/index.html',
+        minify: {
+            collapseWhitespace: true,
+            minifyCSS: true,
+            minifyJS: true
+        }
+    }),
+    new CopyWebpackPlugin([...polyfills, ...assets], {
+        ignore: ['.DS_Store']
+    })
 ];
 
 module.exports = ({ mode, presets }) => {
-  return webpackMerge(
-    {
-      mode,
-      output: {
-        filename: 'webcomponents.js'
-      },
-      module: {
-        rules: [
-          {
-            test: /\.js$/,
-            exclude: /node_modules/,
-            loader: 'babel-loader',
-            options: {
-              plugins: ['@babel/plugin-syntax-dynamic-import'],
-              presets: [
-                [
-                  '@babel/preset-env',
-                  {
-                    useBuiltIns: 'usage',
-                    targets: '>1%, not dead, not ie 11'
-                  }
+    return webpackMerge(
+        {
+            mode,
+            output: {
+                filename: '[name].[chunkhash:8].js'
+            },
+            module: {
+                rules: [
+                    {
+                        test: /\.js$/,
+                        exclude: /node_modules/,
+                        loader: 'babel-loader',
+                        options: {
+                            plugins: ['@babel/plugin-syntax-dynamic-import'],
+                            presets: [
+                                [
+                                    '@babel/preset-env',
+                                    {
+                                        useBuiltIns: 'usage',
+                                        targets: '>1%, not dead, not ie 11'
+                                    }
+                                ]
+                            ]
+                        }
+                    }
                 ]
-              ]
-            }
-          }
-        ]
-      },
-      plugins
-    },
-    modeConfig({ mode, presets }),
-    loadPresets({ mode, presets })
-  );
+            },
+            plugins
+        },
+        modeConfig({ mode, presets }),
+        loadPresets({ mode, presets })
+    );
 };
