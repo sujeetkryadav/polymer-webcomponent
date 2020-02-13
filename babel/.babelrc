@@ -1,0 +1,40 @@
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "useBuiltIns": "entry"
+            }
+        ]
+    ],
+    "plugins": [
+        [
+            "@babel/plugin-proposal-decorators",
+            {
+                "decoratorsBeforeExport": true
+            }
+        ],
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-transform-typescript",
+        "@babel/plugin-transform-arrow-functions",
+        "@babel/plugin-transform-parameters",
+        "@babel/plugin-transform-template-literals",
+        "@babel/plugin-transform-classes",
+        "@babel/plugin-transform-for-of",
+        "@babel/plugin-transform-destructuring",
+        "@babel/plugin-transform-spread",
+        "@babel/plugin-transform-computed-properties",
+        "@babel/plugin-transform-function-name",
+        "@babel/plugin-transform-block-scoped-functions",
+        "@babel/plugin-transform-object-super",
+        "@babel/plugin-transform-instanceof",
+        "@babel/plugin-transform-literals",
+        "@babel/plugin-transform-shorthand-properties",
+        "@babel/plugin-transform-sticky-regex",
+        "@babel/plugin-transform-typeof-symbol",
+        "@babel/plugin-transform-unicode-regex",
+        "@babel/plugin-transform-async-to-generator",
+        "@babel/plugin-proposal-async-generator-functions",
+        "@babel/plugin-transform-regenerator"
+    ]
+}
