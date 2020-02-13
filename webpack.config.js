@@ -43,7 +43,7 @@ module.exports = ({ mode, presets }) => {
     {
       mode,
       output: {
-        filename: '[name].[chunkhash:8].js'
+        filename: 'webcomponents.js'
       },
       module: {
         rules: [

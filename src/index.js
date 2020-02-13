@@ -1,4 +1,5 @@
 import './styles.css';
+import "regenerator-runtime/runtime";
 import '@webcomponents/webcomponentsjs';
 import './views/todo-view.js';
 import './views/autocomplete.js';

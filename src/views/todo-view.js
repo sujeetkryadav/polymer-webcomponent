@@ -270,7 +270,7 @@ class TodoView extends LitElement {
       static="true"
       searchable="false"
       data=${JSON.stringify(this.data)}
-      multiple="true"
+      multiple="false"
       @on-change="${this.onChangeService}">
 
     </dropdown-search-component>
